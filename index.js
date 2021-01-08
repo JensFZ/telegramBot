@@ -54,16 +54,20 @@ bot.onText(/\/ns (.+)/, (msg, match) => {
 
     var type = 'a';
     var dns = '8.8.8.8';
-    var target = 'google.de';
 
     switch(params.length) {
-      case 3:
-        dns = params[2];
-      case 2:
-        type = params[1];
       case 1:
         target = params[0];
         break;
+      case 2:
+	target = params[0];
+        type = params[1];
+	break;
+      case 3:
+        target = params[0];
+        type = params[1];
+        dns = params[2];
+	break;
       default:
         bot.sendMessage(chatId, 'Parameter fehlerhaft');
 	return 
@@ -85,9 +89,7 @@ bot.onText(/\/ns (.+)/, (msg, match) => {
 });
 
 bot.onText(/\/fortune/, (msg, match) => {
- const chatId = msg.chat.id;
-  const resp = match[1]; // the captured "whatever"
-
+  const chatId = msg.chat.id;
   bot.sendMessage(chatId, fortune.fortune());
 
 });
