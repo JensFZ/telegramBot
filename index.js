@@ -6,7 +6,7 @@ const ping = require('ping');
 const nslookup = require('nslookup');
 
 // replace the value below with the Telegram token you receive from @BotFather
-const token = process.env.KEY;
+const token = process.env.KEY || 'TELEGRAM API KEY';
 
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, {polling: true});
