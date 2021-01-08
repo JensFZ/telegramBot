@@ -8,8 +8,10 @@ Er wird bei gelegenheit um weitere Optionen erweitert.
 
 ## Aktuelle Befehle
 
+```
 /help - Help
 /echo ... - Sendet ... zurueck
 /ping ... - Pingt .... an
 /ns domain [type] [dns] - DNS Abfrage type=a, dns=8.8.8.8
 /fortune - Fortune!
+```
