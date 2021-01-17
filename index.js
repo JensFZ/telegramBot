@@ -17,7 +17,7 @@ bot.onText(/\/help/, (msg,match) => {
   const resp = '/help - Help\n' +
                '/echo ... - Sendet ... zurueck\n' +
                '/ping ... - Pingt .... an\n' +
-               '/ns domain [type] [dns] - DNS Abfrage, Default type=a, dns=8.8.8.8' + 
+               '/ns domain [type] [dns] - DNS Abfrage, Default type=a, dns=8.8.8.8\n' + 
                '/impfung - Anzahl der geimpften in Deutschland' +
                '/fortune - Fortune!';
 
@@ -109,7 +109,8 @@ bot.onText(/\/impfung/, (msg, match) => {
   
     // The whole response has been received. Print out the result.
     resp.on('end', () => {
-      bot.sendMessage(chatId, JSON.parse(data).vaccinated);
+      msg = 'Impfungen: ' + JSON.parse(data).vaccinated;
+      bot.sendMessage(chatId, msg);
     });
   
   }).on("error", (err) => {
