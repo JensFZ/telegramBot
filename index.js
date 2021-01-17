@@ -16,7 +16,7 @@ bot.onText(/\/help/, (msg,match) => {
   const resp = '/help - Help\n' +
                '/echo ... - Sendet ... zurueck\n' +
                '/ping ... - Pingt .... an\n' +
-               '/ns domain [type] [dns] - DNS Abfrage type=a, dns=8.8.8.8' + 
+               '/ns domain [type] [dns] - DNS Abfrage, Default type=a, dns=8.8.8.8' + 
                '/fortune - Fortune!';
 
   bot.sendMessage(chatId, resp);
@@ -96,4 +96,3 @@ bot.onText(/\/fortune/, (msg, match) => {
 
 // error handling
 bot.on("polling_error", (err) => console.log(err));
-
