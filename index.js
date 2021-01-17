@@ -109,7 +109,9 @@ bot.onText(/\/impfung/, (msg, match) => {
   
     // The whole response has been received. Print out the result.
     resp.on('end', () => {
-      msg = 'Impfungen: ' + JSON.parse(data).vaccinated;
+      msg = 'Impfungen: ' + JSON.parse(data).vaccinated + '\n' +
+            'Delta: ' + JSON.parse(data).difference_to_the_previous_day + '\n' +
+            'Prozent: ' + JSON.parse(data).quote;
       bot.sendMessage(chatId, msg);
     });
   
