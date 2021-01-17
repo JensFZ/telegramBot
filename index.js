@@ -4,6 +4,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const fortune = require('fortune-teller');
 const ping = require('ping');
 const nslookup = require('nslookup');
+const https = require('https');
 
 // replace the value below with the Telegram token you receive from @BotFather
 const token = process.env.KEY || 'TELEGRAM API KEY';
@@ -97,10 +98,24 @@ bot.onText(/\/fortune/, (msg, match) => {
 
 bot.onText(/\/impfung/, (msg, match) => {
   const chatId = msg.chat.id;
-  const req2 = new Request('https://rki-vaccination-data.vercel.app/api');
-  result = await req2.loadJSON();
 
-  bot.sendMessage(chatId, result.vaccinated);
+  https.get('https://rki-vaccination-data.vercel.app/api', (resp) => {
+    let data = '';
+  
+    // A chunk of data has been received.
+    resp.on('data', (chunk) => {
+      data += chunk;
+    });
+  
+    // The whole response has been received. Print out the result.
+    resp.on('end', () => {
+      bot.sendMessage(chatId, JSON.parse(data).vaccinated);
+    });
+  
+  }).on("error", (err) => {
+    bot.sendMessage(chatId, "Error: " + err.message);
+  });
+
 })
 
 // error handling
