@@ -97,8 +97,8 @@ bot.onText(/\/fortune/, (msg, match) => {
 
 bot.onText(/\/impfung/, (msg, match) => {
   const chatId = msg.chat.id;
-  const req2 = new Request('https://rki-vaccination-data.vercel.app/api')
-  result = await req2.loadJSON()
+  const req2 = new Request('https://rki-vaccination-data.vercel.app/api');
+  result = await req2.loadJSON();
 
   bot.sendMessage(chatId, result.vaccinated);
 })
