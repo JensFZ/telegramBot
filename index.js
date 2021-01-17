@@ -17,6 +17,7 @@ bot.onText(/\/help/, (msg,match) => {
                '/echo ... - Sendet ... zurueck\n' +
                '/ping ... - Pingt .... an\n' +
                '/ns domain [type] [dns] - DNS Abfrage, Default type=a, dns=8.8.8.8' + 
+               '/impfung - Anzahl der geimpften in Deutschland' +
                '/fortune - Fortune!';
 
   bot.sendMessage(chatId, resp);
@@ -93,6 +94,14 @@ bot.onText(/\/fortune/, (msg, match) => {
   bot.sendMessage(chatId, fortune.fortune());
 
 });
+
+bot.onText(/\/impfung/, (msg, match) => {
+  const chatId = msg.chat.id;
+  const req2 = new Request('https://rki-vaccination-data.vercel.app/api')
+  result = await req2.loadJSON()
+
+  bot.sendMessage(chatId, result.vaccinated);
+})
 
 // error handling
 bot.on("polling_error", (err) => console.log(err));
