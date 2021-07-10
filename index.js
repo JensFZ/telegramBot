@@ -12,7 +12,7 @@ const token = process.env.KEY || 'TELEGRAM API KEY';
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, {polling: true});
 
-bot.onText(/\/help/, (msg,match) => {
+bot.onText(/\/help/i, (msg,match) => {
   const chatId = msg.chat.id;
   const resp = '/help - Help\n' +
                '/echo ... - Sendet ... zurueck\n' +
@@ -25,7 +25,7 @@ bot.onText(/\/help/, (msg,match) => {
 });
 
 // Matches "/echo [whatever]"
-bot.onText(/\/echo (.+)/, (msg, match) => {
+bot.onText(/\/echo (.+)/i, (msg, match) => {
   // 'msg' is the received Message from Telegram
   // 'match' is the result of executing the regexp above on the text content
   // of the message
@@ -38,7 +38,7 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
 });
 
 //ping
-bot.onText(/\/ping (.+)/, (msg, match) => {
+bot.onText(/\/ping (.+)/i, (msg, match) => {
   const chatId = msg.chat.id;
   const ip = match[1];
 
@@ -49,7 +49,7 @@ bot.onText(/\/ping (.+)/, (msg, match) => {
   });
 });
 
-bot.onText(/\/ns (.+)/, (msg, match) => {
+bot.onText(/\/ns (.+)/i, (msg, match) => {
   const chatId = msg.chat.id;
   if(match.length==2) {
     const params = (match[1]+'').split(' ');
@@ -90,13 +90,13 @@ bot.onText(/\/ns (.+)/, (msg, match) => {
   }
 });
 
-bot.onText(/\/fortune/, (msg, match) => {
+bot.onText(/\/fortune/i, (msg, match) => {
   const chatId = msg.chat.id;
   bot.sendMessage(chatId, fortune.fortune());
 
 });
 
-bot.onText(/\/impfung/, (msg, match) => {
+bot.onText(/\/impfung/i, (msg, match) => {
   const chatId = msg.chat.id;
 
   https.get('https://rki-vaccination-data.vercel.app/api', (resp) => {
